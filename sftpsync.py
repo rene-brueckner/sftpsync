@@ -5,7 +5,8 @@ import time
 FTP_HOST = os.environ.get("FTP_HOST", "localhost")
 FTP_USER = os.environ.get("FTP_USER", "user")
 FTP_PASS = os.environ.get("FTP_PASS", "password")
-EXCLUDE_DIR = os.environ.get("EXCLUDE_DIR", "exclude_dir")
+REMOTE_DIR = os.environ.get("REMOTE_DIR", "/")
+EXCLUDE_DIR = os.environ.get("EXCLUDE_DIR", "")
 CHECK_INTERVAL = int(os.environ.get("CHECK_INTERVAL", "60"))
 LOCAL_DOWNLOAD_DIR = os.environ.get("LOCAL_DOWNLOAD_DIR", "./data")
 
@@ -55,7 +56,7 @@ def main():
             print("Connecting to FTP server...")
             ftp = connect_to_ftp()
             print("Connected.")
-            download_files(ftp)
+            download_files(ftp, REMOTE_DIR)
             ftp.quit()
             print(f"Sleeping for {CHECK_INTERVAL} seconds...")
             time.sleep(CHECK_INTERVAL)
