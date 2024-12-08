@@ -27,7 +27,7 @@ def download_files(ftp, remote_dir="/"):
         items = ftp.nlst()
 
         for item in items:
-            if item == EXCLUDE_DIR:
+            if item == EXCLUDE_DIR or item == "." or item == "..":
                 print(f"Skipping directory: {item}")
                 continue
 
@@ -51,7 +51,7 @@ def download_files(ftp, remote_dir="/"):
         print(f"Error: {e}")
 
 def main():
-    while True:
+    while True: 
         try:
             print("Connecting to FTP server...")
             ftp = connect_to_ftp()
